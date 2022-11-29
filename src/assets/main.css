@@ -1,0 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300;400;600&display=swap");
+
+:root {
+  --backround-colors: #eff0f3;
+  --headline-colors: #0d0d0d;
+  --paragraph-colors: #2a2a2a;
+  --highlight: #ff8906;
+  --secondary: #f25f4c;
+  --tertiary: #e53170;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: "Signika Negative", Arial, Helvetica, sans-serif;
+  background-color: var(--backround-colors);
+}
