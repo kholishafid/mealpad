@@ -6,8 +6,8 @@ import Header from './components/Header.vue';
 <template>
   <Header />
 
-  <router-view v-slot="{ Component }" :max="3">
-    <keep-alive include="HomeView">
+  <router-view v-slot="{ Component }">
+    <keep-alive include="HomeView" :max="3">
       <component :is="Component" />
     </keep-alive>
   </router-view>

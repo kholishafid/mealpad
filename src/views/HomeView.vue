@@ -8,7 +8,7 @@ import MealCard from '../components/HomeMeal.vue'
     <div class="border-x border-paragraph">
       <div class="flex flex-col items-center w-full border-paragraph py-20">
         <div>
-          <img class="max-w-[300px]" src="@/assets/vegan-recipe.png" :alt="lets - cook - illust">
+          <img class="max-w-[300px]" src="@/assets/vegan-recipe.png" alt="lets - cook - illust">
         </div>
         <div class="text-center my-4">
           <h1 class="text-3xl text-paragraph">Lets Cooking With Me!</h1>

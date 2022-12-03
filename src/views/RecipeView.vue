@@ -14,7 +14,7 @@
         <div class="flex">
 
             <div class="flex-1 border-b border-x border-paragraph">
-                <h4 class="px-5 py-2 border-b border-paragraph bg-secondary">Ingridients</h4>
+                <h4 class="px-5 py-2 border-b border-paragraph bg-highlight">Ingridients</h4>
                 <div class="p-5">
                     <ul v-for="item in 20" :key="item.id">
                         <li v-if="recipe[`strIngredient${item}`]">
@@ -25,7 +25,7 @@
             </div>
 
             <div class="flex-1 border-b border-r border-paragraph">
-                <h4 class="px-5 py-2 border-b border-paragraph bg-secondary">Measure</h4>
+                <h4 class="px-5 py-2 border-b border-paragraph bg-highlight">Measure</h4>
                 <div class="p-5">
                     <ul v-for="item in 20" :key="item.id">
                         <li v-if="recipe[`strMeasure${item}`]">
@@ -38,7 +38,7 @@
         </div>
 
         <div class="border-b  border-paragraph">
-            <div class="px-5 py-2 border-b border-x border-paragraph  font-bold">Istruction</div>
+            <div class="px-5 py-2 border-b border-x border-paragraph  font-bold bg-highlight">Istruction</div>
             <div class="p-5">
                 <pre class="whitespace-pre-wrap font-Signika">{{ recipe.strInstructions }}</pre>
             </div>

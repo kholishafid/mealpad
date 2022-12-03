@@ -2,7 +2,7 @@
     <div class="border border-paragraph border-b-0 py-3 bg-slate-200 h-14 box-border">
         <h1 class="text-2xl text-center ">How about this meal?</h1>
     </div>
-    <div class=" overflow-hidden border border-paragraph rounded-sm bg-white text-paragraph">
+    <div class=" overflow-hidden border border-paragraph rounded-sm bg-white text-paragraph" v-if="randomRecipe">
         <img :src="randomRecipe.strMealThumb" :alt="randomRecipe.strMeal">
         <div class="p-6 border-paragraph border-t box-border">
             <p class="text-xl font-bold mb-2">{{ randomRecipe.strMeal }}</p>
@@ -25,8 +25,7 @@ const router = useRouter()
 const props = defineProps(['meal'])
 
 const randomRecipe = ref(null)
-
-await axios({
+axios({
     method: 'get',
     url: 'https://www.themealdb.com/api/json/v1/1/random.php',
 }).then((res) => {
