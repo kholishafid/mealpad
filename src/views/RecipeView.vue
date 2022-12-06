@@ -8,7 +8,8 @@
                 <p class="mr-2">#{{ recipe.strCategory }}</p>
                 <p>#{{ recipe.strArea }}</p>
             </div>
-            <span class="material-icons-outlined top-5 right-5 absolute">favorite_border</span>
+            <span class="material-icons-outlined top-5 right-5 absolute"
+                @click="pushRecipeToLocal(recipe.idMeal, recipe.strMeal, recipe.strCategory, recipe.strArea)">favorite_border</span>
         </div>
 
         <div class="flex">
@@ -54,11 +55,12 @@
 
 <script setup>
 import axios from 'axios';
-import { ref } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute()
 const recipe = ref(null);
+const localData = ref([])
 
 axios({
     method: 'get',
@@ -66,5 +68,35 @@ axios({
 }).then((res) => {
     recipe.value = res.data.meals[0]
 })
+
+const getLocalStorage = () => {
+    let dummy = JSON.parse(localStorage.getItem('favoriteMeals'))
+
+    if (typeof dummy !== 'object' || !localStorage.getItem('favoriteMeals')) {
+        localData.value = []
+        return
+    } else {
+        localData.value = dummy
+    }
+
+}
+
+const pushRecipeToLocal = (idMeal, strMeal, strCategory, strArea) => {
+    localData.value.push({
+        idMeal, strMeal, strCategory, strArea
+    })
+
+    localStorage.setItem('favoriteMeals', JSON.stringify(localData.value))
+}
+
+const clearLocalData = () => {
+    localData.value = null
+}
+
+onMounted(() => {
+    getLocalStorage()
+})
+
+onUnmounted(clearLocalData)
 
 </script>

@@ -14,6 +14,21 @@
                 @click="router.push({ path: `recipe/${randomRecipe.idMeal}` })">Recipe</button>
         </div>
     </div>
+    <div v-else>
+        <div class="w-screen aspect-square bg-slate-600 text-[50vw] text-slate-500 flex items-center justify-center">
+            <div>
+                ?
+            </div>
+        </div>
+        <div class="p-6 border-paragraph border-t box-border">
+            <p class="text-xl font-bold mb-1">Meal Name</p>
+            <div>
+                <span class="mr-2"># Category</span>
+                <span># Area</span>
+            </div>
+            <button class="border rounded-md px-2 py-0.5 bg-slate-200 mt-3 border-paragraph">Recipe</button>
+        </div>
+    </div>
 </template>
 
 <script setup>
@@ -31,4 +46,5 @@ axios({
 }).then((res) => {
     randomRecipe.value = res.data.meals[0]
 })
+
 </script>
