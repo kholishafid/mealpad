@@ -8,8 +8,12 @@
                 <p class="mr-2">#{{ recipe.strCategory }}</p>
                 <p>#{{ recipe.strArea }}</p>
             </div>
-            <span class="material-icons-outlined top-5 right-5 absolute"
-                @click="pushRecipeToLocal(recipe.idMeal, recipe.strMeal, recipe.strCategory, recipe.strArea)">favorite_border</span>
+            <div class="top-5 right-5 absolute">
+                <span class="material-icons-outlined"
+                    @click="pushRecipeToLocal(recipe.idMeal, recipe.strMeal, recipe.strCategory, recipe.strArea)"
+                    v-if="!isFavorited">favorite_border</span>
+                <span class="material-icons text-red-600" v-else @click="removeFromFavorite">favorite</span>
+            </div>
         </div>
 
         <div class="flex">
@@ -61,6 +65,7 @@ import { useRoute } from 'vue-router';
 const route = useRoute()
 const recipe = ref(null);
 const localData = ref([])
+const isFavorited = ref(null)
 
 axios({
     method: 'get',
@@ -86,6 +91,8 @@ const pushRecipeToLocal = (idMeal, strMeal, strCategory, strArea) => {
         idMeal, strMeal, strCategory, strArea
     })
 
+    checkFavorited()
+
     localStorage.setItem('favoriteMeals', JSON.stringify(localData.value))
 }
 
@@ -93,8 +100,29 @@ const clearLocalData = () => {
     localData.value = null
 }
 
+const checkFavorited = () => {
+    isFavorited.value = localData.value.filter((item) => {
+        return item.idMeal == route.params.id
+    })
+    if (isFavorited.value.length < 1) {
+        isFavorited.value = null
+    }
+}
+
+const removeFromFavorite = () => {
+    localData.value = localData.value.filter((item) => {
+        console.log(item.idMeal)
+        return item.idMeal != route.params.id
+    })
+
+    isFavorited.value = null
+
+    localStorage.setItem('favoriteMeals', JSON.stringify(localData.value))
+}
+
 onMounted(() => {
     getLocalStorage()
+    checkFavorited()
 })
 
 onUnmounted(clearLocalData)
