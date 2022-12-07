@@ -7,13 +7,15 @@ import Sidebar from './components/Sidebar.vue';
 <template>
   <Header />
 
-  <router-view v-slot="{ Component }">
-    <div class="relative overflow-hidden flex-1" id="main-section">
-      <keep-alive include="HomeView" :max="3">
-        <component :is="Component" />
-      </keep-alive>
-    </div>
-  </router-view>
+  <div class="relative" id="main-section">
+    <router-view v-slot="{ Component }">
+      <div class="relative overflow-hidden flex-1 max-w-[800px] m-auto bg-background">
+        <keep-alive include=" HomeView" :max="3">
+          <component :is="Component" />
+        </keep-alive>
+      </div>
+    </router-view>
+  </div>
 
   <Teleport to="#main-section">
     <sidebar />

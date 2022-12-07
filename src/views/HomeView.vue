@@ -5,9 +5,8 @@ import { Motion } from 'motion/vue'
 </script>
 
 <template>
-  <main class="w-screen">
-
-    <div class="border-x border-paragraph">
+  <main>
+    <div>
 
       <Motion :initial="{ y: -100, opacity: 0 }" :animate="{ y: 0, opacity: 1 }"
         :transition="{ delay: 0.2, duration: 1 }">

@@ -1,6 +1,6 @@
 <template>
     <div v-if="sidebarVisibility"
-        class="w-4/5 h-screen bg-slate-100 absolute top-0 right-0 py-6 px-8 border-l border-paragraph">
+        class="w-4/5 h-screen bg-white absolute top-0 right-0 py-6 px-8 border-l border-paragraph">
         <router-link to="/search" class="block mb-5">
             Search
         </router-link>
