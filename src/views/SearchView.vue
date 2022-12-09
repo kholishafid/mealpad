@@ -11,24 +11,29 @@
                     </span></button>
             </div>
         </div>
-        <div class="flex flex-wrap px-5 justify-center mb-5">
+        <div class="flex flex-wrap px-5  mb-5">
             <h3 class="mr-3">Show this category : </h3>
             <div v-for="item in mealCategory" :key="item.id">
-                <span class="mr-3 underline" @click="getMealByCategory(item.strCategory)">{{ item.strCategory }}</span>
+                <span class="mr-3 hover:underline hover:text-highlight cursor-pointer"
+                    @click="getMealByCategory(item.strCategory)">{{
+                            item.strCategory
+                    }}</span>
             </div>
         </div>
-        <div class="flex flex-wrap px-5 justify-center mb-5">
+        <div class="flex flex-wrap px-5 mb-5">
             <h3 class="mr-3">Show this Area : </h3>
             <div v-for="item in mealArea" :key="item.id">
-                <span class="mr-3 underline" @click="getMealByArea(item.strArea)">{{ item.strArea }}</span>
+                <span class="mr-3 hover:underline hover:text-highlight cursor-pointer "
+                    @click="getMealByArea(item.strArea)">{{
+                            item.strArea
+                    }}</span>
             </div>
         </div>
-        <div class="px-5 py-3 border-y border-paragraph bg-slate-200">
+        <div class="px-5 py-3 border-y border-paragraph bg-slate-200 mb-6">
             <h3>Search Result</h3>
         </div>
-        <div class="grid grid-cols-2 border-t border-l border-paragraph m-2">
-            <div v-for="meal in data" :key="meal.id"
-                class="p-4 box-border bg-slate-50 border-b border-r border-paragraph">
+        <div class="grid grid-cols-2 border-t border-l border-paragraph m-2" v-if="data">
+            <div v-for="meal in data" :key="meal.id" class="box-border bg-slate-50 border-b border-r border-paragraph">
                 <SearchMealCard :meal="meal" />
             </div>
         </div>
@@ -41,8 +46,6 @@ import { ref, watchEffect } from 'vue';
 import SearchMealCard from '../components/SearchMealCard.vue';
 
 const data = ref(null)
-const category = ref(null)
-
 const searchQuery = ref(null)
 const timeoutInterval = ref(null)
 

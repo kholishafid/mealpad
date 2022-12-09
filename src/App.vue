@@ -13,6 +13,7 @@ import Sidebar from './components/Sidebar.vue';
         <keep-alive include=" HomeView" :max="3">
           <component :is="Component" />
         </keep-alive>
+        <img src="@/assets/doodad.png" alt="pattern" class="border-t border-paragraph mt-5 h-12 w-full object-cover">
       </div>
     </router-view>
   </div>

@@ -1,13 +1,11 @@
 <template>
     <div class="">
-        <div>
-            <h3>{{ meal.strMeal }}</h3>
-            <div class="text-xs mt-1 flex justify-between items-end">
-                <div>
-                    <p class="mr-2"># {{ meal.strCategory }}</p>
-                    <p># {{ meal.strArea }}</p>
-                </div>
-                <a class="underline text-highlight" @click="router.push({ path: `recipe/${meal.idMeal}` })">Recipe</a>
+        <div class="sm:flex">
+            <img :src="meal.strMealThumb" alt="" class="w-full sm:w-1/3 aspect-square object-cover">
+            <div class="sm:border-l border-paragraph p-5 flex-1">
+                <h3>{{ meal.strMeal }}</h3>
+                <a class="underline text-highlight cursor-pointer"
+                    @click="router.push({ path: `recipe/${meal.idMeal}` })">Recipe</a>
             </div>
         </div>
     </div>
