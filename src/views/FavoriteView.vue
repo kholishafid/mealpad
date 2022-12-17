@@ -1,7 +1,14 @@
 <template>
-    <main class="max-w-[800px] flex-1 border-x border-paragraph">
-        <div class="mt-5 border-t border-paragraph">
-            <div v-for="meal in favoriteList" key="meal.idMeal" class="p-5 bg-slate-50 border-b border-paragraph">
+    <main class="max-w-[800px] flex-1" v-if="favoriteList">
+        <div class="mt-5 border-t border-paragraph" v-if="favoriteList.length > 0">
+            <div v-for="meal in favoriteList" key="meal.idMeal"
+                class="p-5 bg-slate-50 border-b border-paragraph relative">
+                <div class="absolute right-4 top-4 cursor-pointer rounded-full"
+                    @click="removeFromFavorite(meal.idMeal)">
+                    <span class="material-icons-outlined">
+                        remove
+                    </span>
+                </div>
                 <h3>{{ meal.strMeal }}</h3>
                 <div class="text-xs mt-1 flex justify-between items-end">
                     <div>
@@ -12,6 +19,9 @@
                         @click="router.push({ path: `recipe/${meal.idMeal}` })">Recipe</a>
                 </div>
             </div>
+        </div>
+        <div v-else class="text-center pt-5">
+            <p>You haven't added yet....</p>
         </div>
     </main>
 </template>
@@ -31,6 +41,16 @@ const getLocalStorage = () => {
 const clearFavoriteList = () => {
     favoriteList.value = null
 }
+
+const removeFromFavorite = (id) => {
+    favoriteList.value = favoriteList.value.filter((item) => {
+        console.log(item.idMeal)
+        return item.idMeal != id
+    })
+
+    localStorage.setItem('favoriteMeals', JSON.stringify(favoriteList.value))
+}
+
 
 onMounted(getLocalStorage)
 

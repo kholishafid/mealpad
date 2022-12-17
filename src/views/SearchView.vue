@@ -37,6 +37,9 @@
                 <SearchMealCard :meal="meal" />
             </div>
         </div>
+        <div v-else>
+            <p class="text-center">Nothing to show......</p>
+        </div>
     </main>
 </template>
 
