@@ -1,40 +1,88 @@
 <script setup>
-import MealCard from '../components/HomeMeal.vue'
-import { Motion } from 'motion/vue'
-
+import MealCard from "../components/HomeMeal.vue";
+import { Motion } from "motion/vue";
 </script>
 
 <template>
-  <main>
-    <div>
+  <header>
+    <Motion
+      :initial="{ y: -100, opacity: 0 }"
+      :animate="{ y: 0, opacity: 1 }"
+      :transition="{ delay: 0.2, duration: 1 }"
+    >
+      <img src="../assets/vegan-recipe.png" alt="lets cook illust" />
+      <h1>Lets Cooking With Me!</h1>
+    </Motion>
+    <button>
+      <router-link to="/search">
+        <h6>Search Recipes</h6>
+      </router-link>
+    </button>
+  </header>
 
-      <Motion :initial="{ y: -100, opacity: 0 }" :animate="{ y: 0, opacity: 1 }"
-        :transition="{ delay: 0.2, duration: 1 }">
-        <div class="flex flex-col items-center w-full border-paragraph py-20">
-          <div>
-            <img class="max-w-[300px]" src="@/assets/vegan-recipe.png" alt="lets - cook - illust">
-          </div>
-          <div class="text-center my-4">
-            <h1 class="text-3xl text-paragraph">Lets Cooking With Me!</h1>
-          </div>
-          <div class="mt-2">
-            <router-link to="/search" class="px-4 py-2 bg-button text-paragraph rounded border border-paragraph block">
-              Search
-              Recipes</router-link>
-          </div>
-        </div>
-      </Motion>
-
-      <div>
-        <Suspense>
-          <MealCard />
-          <template #fallback>
-            <div>
-              <div class="border border-paragraph border-b-0 py-3 bg-tertiary h-14 box-border"></div>
-            </div>
-          </template>
-        </Suspense>
+  <Suspense>
+    <main class="container">
+      <h3>How About This Meals</h3>
+      <div class="main-grid">
+        <MealCard />
+        <MealCard />
+        <MealCard />
       </div>
-    </div>
-  </main>
+    </main>
+    <template #fallback>
+      <div>
+        <div></div>
+      </div>
+    </template>
+  </Suspense>
 </template>
+
+<style scoped>
+header {
+  display: grid;
+  place-items: center;
+}
+header div:first-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+header a {
+  display: flex;
+  justify-content: center;
+}
+
+header h6 {
+  display: inline-block;
+}
+header span {
+  font-size: 1.2rem;
+}
+
+main h3 {
+  text-align: center;
+}
+
+.main-grid {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+}
+
+@media screen and (min-width: 992px) {
+  header div h1 {
+    margin: 0 0 0 3rem;
+  }
+
+  header button h6 {
+    margin: 0;
+  }
+
+  header button {
+    width: 20%;
+    margin-top: 4rem;
+  }
+}
+</style>

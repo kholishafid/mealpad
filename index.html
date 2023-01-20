@@ -21,17 +21,16 @@
     />
     <title>MealPad</title>
     <style>
-      #app {
-        background-image: url(./src/assets/pattern-bg.png);
-        background-size: cover;
-      }
       * {
         scrollbar-width: none;
       }
+      ::-webkit-scrollbar {
+        width: none;
+        display: none;
+      }
     </style>
   </head>
-  <body>
-    <div id="app" class="flex flex-col min-h-screen"></div>
+  <body id="app">
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

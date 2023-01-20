@@ -6,11 +6,17 @@ Link : [>>>>](https://mealpad.netlify.app)
 
 API source : [Free Meal API](https://www.themealdb.com/api.php)
 
-Feature : 
+Feature :
+
 - Search Recipe
 - Add to Favorite
 
-What i learned : 
+What i learned :
+
 - Make a reusable component
 - Vue watchEffect() , KeepAlive , Teleport
 - Basic usage of MotionOne
+
+20-Jan-22 Update Redesign in progress
+
+- now using pico css , with simple ui
