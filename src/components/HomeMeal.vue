@@ -30,10 +30,15 @@ onMounted(getRandomRecipe);
       v-if="randomRecipe"
       class="body"
     >
-      <div style="height: 100%">
-        <img :src="randomRecipe.strMealThumb" :alt="randomRecipe.strMeal" />
+      <div v-if="randomRecipe.strMealThumb">
+        <img
+          :src="randomRecipe.strMealThumb"
+          :alt="randomRecipe.strMeal"
+          loading="eager"
+        />
       </div>
     </Motion>
+    <div v-else aria-busy="true"></div>
     <footer v-if="randomRecipe">
       <div>
         <h4>{{ randomRecipe.strMeal }}</h4>
@@ -42,34 +47,28 @@ onMounted(getRandomRecipe);
           <span>#{{ randomRecipe.strArea }}</span>
         </div>
       </div>
-    </footer>
-    <!-- <footer>
       <div>
-        <button @click="router.push({ path: `recipe/${randomRecipe.idMeal}` })">
+        <router-link :to="'/recipe/' + randomRecipe.idMeal">
           Recipe
-        </button>
-        <button @click="getRandomRecipe">Another</button>
+        </router-link>
+        <span role="link" @click="getRandomRecipe">Another</span>
       </div>
-    </footer> -->
+    </footer>
   </article>
 </template>
 
 <style scoped>
 article {
-  padding: 0;
   margin: 0;
-  width: 350px;
+  padding: 0;
+  width: 100%;
   max-height: fit-content;
-  background-color: #fffffe;
   overflow: hidden;
+  background-color: transparent;
 }
 article footer {
   padding: 1rem;
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: #fffffe;
 }
 
 footer h4 {
@@ -78,20 +77,25 @@ footer h4 {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: #0f0e17;
 }
 
 footer span {
-  margin-right: 10px;
-  color: #2e2f3e;
+  margin: 0 10px 4px 0;
 }
 
+footer div:nth-child(2) a {
+  margin-right: 10px;
+}
+footer div:nth-child(2) span {
+  cursor: pointer;
+}
 article .body {
   box-sizing: border-box;
   display: grid;
   place-items: center;
 }
 .body img {
+  width: 100%;
   height: 100%;
   aspect-ratio: square;
   object-fit: cover;

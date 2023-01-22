@@ -1,6 +1,7 @@
 <script setup>
 import Header from "./components/Navbar.vue";
 import Sidebar from "./components/Sidebar.vue";
+import Footer from "./components/Footer.vue";
 </script>
 
 <template>
@@ -12,11 +13,10 @@ import Sidebar from "./components/Sidebar.vue";
     </keep-alive>
   </router-view>
 
-  <Teleport to="#main-section">
+  <Teleport to="#app">
     <sidebar />
   </Teleport>
-  <footer class="container" style="text-align: center">
-    <strong> &copy; hafnurme 2022 </strong>
-  </footer>
+
+  <Footer />
 </template>
 <style scoped></style>

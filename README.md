@@ -17,6 +17,7 @@ What i learned :
 - Vue watchEffect() , KeepAlive , Teleport
 - Basic usage of MotionOne
 
-20-Jan-22 Update Redesign in progress
+20-Jan-22 Update Redesign
 
-- now using pico css , with simple ui
+- Now using Pico.css , with simple ui.
+- Aiming for more smooth experience.

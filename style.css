@@ -17,6 +17,7 @@
   --primary-focus: rgba(255, 255, 255, 0);
   --primary-inverse: #fff;
   --contras: #fffffe;
+  --secondary: rgba(15, 14, 22, 0.3);
 }
 
 /* Pink Dark scheme (Auto) */
@@ -36,6 +37,9 @@
     --primary-focus: rgba(255, 255, 255, 0);
     --primary-inverse: #fff;
     --contras: #fffffe;
+    --card-background-color: rgba(255, 255, 255, 0.01);
+    --card-sectionning-background-color: rgba(255, 255, 255, 0.03);
+    --code-background-color: rgba(255, 255, 255, 0.03);
   }
 }
 
@@ -55,6 +59,7 @@
   --primary-focus: rgba(255, 255, 255, 0);
   --primary-inverse: #fff;
   --contras: #fffffe;
+  --secondary: rgba(255, 255, 255, 0.3);
 }
 
 /* Pink (Common styles) */
@@ -64,4 +69,7 @@
   --switch-color: var(--primary-inverse);
   --switch-checked-background-color: var(--primary);
   --font-family: Montserrat, Helvatica;
+  --dark-headline: #0f0e17;
+  --dark-paragraph: #2e2f3e;
+  --tertiary: #e53170;
 }

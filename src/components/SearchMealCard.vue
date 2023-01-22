@@ -1,6 +1,6 @@
 <template>
   <article>
-    <img :src="meal.strMealThumb" :alt="meal.strMealThumb" />
+    <img :src="meal.strMealThumb" :alt="meal.strMealThumb" loading="lazy" />
     <footer>
       <h5>
         {{ meal.strMeal }}
@@ -14,19 +14,16 @@
 article {
   width: 100%;
   padding: 0;
-  background-color: #fffffe;
   margin: 0;
 }
 
 article footer {
   padding: 1rem;
   margin: 0;
-  background-color: #fffffe;
 }
 
 footer h5 {
   margin-bottom: 5px;
-  color: #0f0e17;
   height: 28px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -34,10 +31,6 @@ footer h5 {
 
 footer a {
   cursor: pointer;
-}
-
-article span {
-  color: #2e2f3e;
 }
 </style>
 

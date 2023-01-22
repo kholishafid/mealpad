@@ -1,6 +1,9 @@
 <script setup>
 import MealCard from "../components/HomeMeal.vue";
 import { Motion } from "motion/vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 </script>
 
 <template>
@@ -13,10 +16,8 @@ import { Motion } from "motion/vue";
       <img src="../assets/vegan-recipe.png" alt="lets cook illust" />
       <h1>Lets Cooking With Me!</h1>
     </Motion>
-    <button>
-      <router-link to="/search">
-        <h6>Search Recipes</h6>
-      </router-link>
+    <button @click="router.push('/search')">
+      <h6>Search Recipes</h6>
     </button>
   </header>
 
@@ -31,7 +32,7 @@ import { Motion } from "motion/vue";
     </main>
     <template #fallback>
       <div>
-        <div></div>
+        <div aria-busy="true"></div>
       </div>
     </template>
   </Suspense>
@@ -42,6 +43,11 @@ header {
   display: grid;
   place-items: center;
 }
+
+header h1 {
+  text-align: center;
+  margin: 3rem 0;
+}
 header div:first-child {
   display: flex;
   justify-content: center;
@@ -49,13 +55,13 @@ header div:first-child {
   flex-wrap: wrap;
 }
 
-header a {
-  display: flex;
-  justify-content: center;
+header button {
+  width: fit-content;
 }
 
 header h6 {
   display: inline-block;
+  margin: 0;
 }
 header span {
   font-size: 1.2rem;
@@ -66,22 +72,27 @@ main h3 {
 }
 
 .main-grid {
-  display: flex;
-  gap: 2rem;
-  justify-content: center;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+@media screen and (max-width: 992px) {
+  .main-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 576px) {
+  .main-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 828px) {
   header div h1 {
     margin: 0 0 0 3rem;
   }
-
-  header button h6 {
-    margin: 0;
-  }
-
   header button {
-    width: 20%;
     margin-top: 4rem;
   }
 }

@@ -1,88 +1,140 @@
 <template>
-  <div v-if="recipe">
+  <main class="container" v-if="recipe">
     <img
       :src="recipe.strMealThumb"
-      :alt="recipe.strMeal"
-      class="w-screen aspect-square"
+      :alt="'image of ' + recipe.strMeal"
+      class="meal-thumb"
     />
-    <div class="relative p-5 border-y border-paragraph bg-white">
-      <h1 class="text-2xl mb-2">{{ recipe.strMeal }}</h1>
-      <div class="flex">
-        <p class="mr-2">#{{ recipe.strCategory }}</p>
-        <p>#{{ recipe.strArea }}</p>
-      </div>
-      <div class="top-5 right-5 absolute">
-        <span
-          class="material-icons-outlined"
-          @click="
-            pushRecipeToLocal(
-              recipe.idMeal,
-              recipe.strMeal,
-              recipe.strCategory,
-              recipe.strArea
-            )
-          "
-          v-if="!isFavorited"
-          >favorite_border</span
-        >
-        <span
-          class="material-icons text-red-600"
-          v-else
-          @click="removeFromFavorite"
-          >favorite</span
-        >
-      </div>
-    </div>
-
-    <div class="flex">
-      <div class="flex-1 border-b border-x border-paragraph">
-        <h4 class="px-5 py-2 border-b border-paragraph bg-highlight">
-          Ingridients
-        </h4>
-        <div class="p-5">
-          <ul v-for="item in 20" :key="item.id">
-            <li v-if="recipe[`strIngredient${item}`]">
-              {{ item }}. {{ recipe[`strIngredient${item}`] }}
-            </li>
-          </ul>
+    <article class="recipe">
+      <header>
+        <h3>{{ recipe.strMeal }}</h3>
+        <div class="sub-heading">
+          <div class="tag">
+            <span># {{ recipe.strCategory }}</span>
+            <span># {{ recipe.strArea }}</span>
+          </div>
+          <div>
+            <span
+              class="material-icons-outlined favorite-icon"
+              @click="
+                pushRecipeToLocal(
+                  recipe.idMeal,
+                  recipe.strMeal,
+                  recipe.strCategory,
+                  recipe.strArea
+                )
+              "
+              v-if="!isFavorited"
+              >favorite_border</span
+            >
+            <span
+              class="material-icons favorite-icon"
+              v-else
+              @click="removeFromFavorite"
+              data-fav="favorited"
+              >favorite</span
+            >
+          </div>
+        </div>
+      </header>
+      <div class="grid card-body">
+        <div>
+          <h6>Ingridients</h6>
+          <div>
+            <ul v-for="item in 20">
+              <li v-if="recipe[`strIngredient${item}`]">
+                {{ item }}. {{ recipe[`strIngredient${item}`] }}
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <h6>Measure</h6>
+          <div>
+            <ul v-for="item in 20">
+              <li v-if="recipe[`strMeasure${item}`].length > 1">
+                {{ recipe[`strMeasure${item}`] }}
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-
-      <div class="flex-1 border-b border-r border-paragraph">
-        <h4 class="px-5 py-2 border-b border-paragraph bg-highlight">
-          Measure
-        </h4>
-        <div class="p-5">
-          <ul v-for="item in 20" :key="item.id">
-            <li v-if="recipe[`strMeasure${item}`]">
-              {{ recipe[`strMeasure${item}`] }}
-            </li>
-          </ul>
-        </div>
+    </article>
+    <article>
+      <h6>Istruction</h6>
+      <div>
+        <pre>{{ recipe.strInstructions }}</pre>
       </div>
-    </div>
-
-    <div class="border-b border-paragraph">
-      <div
-        class="px-5 py-2 border-b border-x border-paragraph font-bold bg-highlight"
-      >
-        Istruction
-      </div>
-      <div class="p-5">
-        <pre class="whitespace-pre-wrap font-Signika">{{
-          recipe.strInstructions
-        }}</pre>
-      </div>
-    </div>
-    <div class="p-5 flex">
       <span>Watch on : </span>
-      <a :href="recipe.strYoutube" class="flex items-center px-2 w-fit"
-        ><i class="fa-brands fa-youtube mr-2 text-[#ff0000]"></i>
-        <span class="border-b border-paragraph">Youtube</span></a
-      >
-    </div>
-  </div>
+      <a><i class="fa-brands fa-youtube"></i> <span>Youtube</span></a>
+    </article>
+  </main>
+  <main class="loading" v-else>
+    <p aria-busy="true"></p>
+  </main>
 </template>
+
+<style scoped>
+.recipe header p {
+  margin-right: 10px;
+}
+.sub-heading {
+  position: relative;
+}
+.meal-thumb {
+  border-radius: var(--border-radius);
+}
+.tag span {
+  margin-right: 10px;
+  display: inline-block;
+}
+.favorite-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+.favorite-icon[data-fav="favorited"] {
+  color: var(--tertiary);
+}
+
+.card-body ul li {
+  font-size: small;
+}
+pre {
+  white-space: pre-wrap;
+  font-family: Inter;
+  line-height: 32px;
+  padding: 4px;
+}
+.loading {
+  display: block;
+  text-align: center;
+}
+
+@media screen and (min-width: 992px) {
+  main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr fit-content;
+    grid-template-areas:
+      "img  card"
+      "inst inst";
+    gap: 1rem;
+  }
+  main img {
+    grid-area: img;
+  }
+  main article:nth-child(2) {
+    grid-area: card;
+    margin: 0;
+  }
+  main article:nth-child(3) {
+    grid-area: inst;
+    margin: 0;
+  }
+}
+</style>
 
 <script setup>
 import axios from "axios";

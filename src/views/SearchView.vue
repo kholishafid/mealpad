@@ -5,22 +5,26 @@
         <input type="text" name="" id="" v-model="searchQuery" />
       </div>
     </div>
-    <div class="categories">
-      <h5>Show this category :</h5>
-      <div v-for="item in mealCategory" :key="item.id">
-        <span @click="getMealByCategory(item.strCategory)">
-          {{ item.strCategory }}
-        </span>
+    <details>
+      <summary>Show with this category :</summary>
+      <div class="categories">
+        <div v-for="item in mealCategory" :key="item.id">
+          <span @click="getMealByCategory(item.strCategory)">
+            {{ item.strCategory }}
+          </span>
+        </div>
       </div>
-    </div>
-    <div class="categories">
-      <h5>Show this Area :</h5>
-      <div v-for="item in mealArea" :key="item.id">
-        <span @click="getMealByArea(item.strArea)">
-          {{ item.strArea }}
-        </span>
+    </details>
+    <details>
+      <summary>Show with this Area :</summary>
+      <div class="categories">
+        <div v-for="item in mealArea" :key="item.id">
+          <span @click="getMealByArea(item.strArea)">
+            {{ item.strArea }}
+          </span>
+        </div>
       </div>
-    </div>
+    </details>
   </header>
   <main class="container">
     <div>
@@ -41,19 +45,8 @@
 header {
   padding-bottom: 0;
 }
-.categories {
+details {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1.2rem;
-}
-
-.categories span {
-  cursor: pointer;
-}
-
-.categories h5 {
-  margin: 0;
 }
 
 .grided-result {
@@ -62,6 +55,14 @@ header {
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
 }
+.categories {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.categories div {
+  cursor: pointer;
+}
 @media screen and (max-width: 992px) {
   .grided-result {
     grid-template-columns: repeat(2, 1fr);
@@ -69,7 +70,7 @@ header {
 }
 @media screen and (max-width: 576px) {
   .grided-result {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 </style>

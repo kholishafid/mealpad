@@ -1,23 +1,64 @@
+<script setup>
+import Close from "../components/Icon/Close.vue";
+import { useUiState } from "../stores/uistate";
+import { storeToRefs } from "pinia";
+
+const uiState = useUiState();
+const { sidebarVisibility } = storeToRefs(uiState);
+const { changeSidebarVisibility } = uiState;
+</script>
+
 <template>
-    <div v-if="sidebarVisibility"
-        class="w-4/5 h-full border-b bg-white absolute top-0 right-0 py-6 px-8 border-l border-paragraph">
-        <router-link to="/" class="block mb-5">
-            Home
-        </router-link>
-        <router-link to="/search" class="block mb-5">
-            Search
-        </router-link>
-        <router-link to="/favorite" class="block mb-5">
-            Favorites
-        </router-link>
+  <div class="sidebar" v-if="sidebarVisibility">
+    <div class="close-button">
+      <span @click="changeSidebarVisibility">
+        <Close />
+      </span>
     </div>
+    <h5>Mealpad</h5>
+
+    <ul>
+      <li>
+        <router-link to="/"> Home </router-link>
+      </li>
+      <li>
+        <router-link to="/search"> Search </router-link>
+      </li>
+      <li>
+        <router-link to="/favorite"> Favorites </router-link>
+      </li>
+    </ul>
+  </div>
 </template>
 
-<script setup>
-import { useUiState } from '../stores/uistate'
-import { storeToRefs } from 'pinia'
+<style scoped>
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  z-index: 99999;
+  background-color: hsla(247, 24%, 7%, 0.8);
+  backdrop-filter: blur(100px);
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  padding: 0 var(--block-spacing-vertical);
+  border-left: 1px solid hsla(0, 0%, 50%, 0.1);
+}
+.sidebar ul li {
+  list-style: disc;
+}
+.sidebar .close-button {
+  text-align: right;
+  margin: 1rem 0;
+}
+.sidebar ul li a {
+  color: #fffffe;
+}
 
-const uiState = useUiState()
-const { sidebarVisibility } = storeToRefs(uiState)
-
-</script>
+.router-link-exact-active {
+  text-underline-offset: 4px;
+  text-decoration-color: var(--primary);
+}
+</style>
