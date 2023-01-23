@@ -2,15 +2,16 @@
 import { Motion } from "@motionone/vue";
 import axios from "axios";
 import { onMounted, ref } from "vue";
-import { useRouter } from "vue-router";
+import { $ref } from "vue/macros";
 
-const router = useRouter();
 const props = defineProps(["meal"]);
+
+const imgload = $ref(true);
 
 const randomRecipe = ref(null);
 
-const getRandomRecipe = () => {
-  axios({
+const getRandomRecipe = async () => {
+  await axios({
     method: "get",
     url: "https://www.themealdb.com/api/json/v1/1/random.php",
   }).then((res) => {
@@ -22,24 +23,26 @@ onMounted(getRandomRecipe);
 </script>
 
 <template>
-  <article>
+  <article class="recipe" v-if="randomRecipe">
     <Motion
       :initial="{ opacity: 0, scale: 0.8 }"
       :animate="{ opacity: 1, scale: 1 }"
       :transition="{ delay: 0.2, duration: 1 }"
-      v-if="randomRecipe"
-      class="body"
+      class="recipe__thumb"
     >
-      <div v-if="randomRecipe.strMealThumb">
+      <template v-if="randomRecipe.strMealThumb">
         <img
           :src="randomRecipe.strMealThumb"
           :alt="randomRecipe.strMeal"
-          loading="eager"
+          @load="imgload = false"
+          :style="{ display: imgload === true ? 'none' : 'block' }"
         />
-      </div>
+        <div class="recipe__thumb--loading" v-if="imgload">
+          <span aria-busy="true"></span>
+        </div>
+      </template>
     </Motion>
-    <div v-else aria-busy="true"></div>
-    <footer v-if="randomRecipe">
+    <footer>
       <div>
         <h4>{{ randomRecipe.strMeal }}</h4>
         <div>
@@ -55,6 +58,9 @@ onMounted(getRandomRecipe);
       </div>
     </footer>
   </article>
+  <div v-else class="recipe--loading">
+    <span aria-busy="true"></span>
+  </div>
 </template>
 
 <style scoped>
@@ -69,6 +75,15 @@ article {
 article footer {
   padding: 1rem;
   margin: 0;
+}
+
+.recipe--loading {
+  width: 100%;
+  aspect-ratio: 68/93;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  display: grid;
+  place-items: center;
 }
 
 footer h4 {
@@ -97,7 +112,13 @@ article .body {
 .body img {
   width: 100%;
   height: 100%;
-  aspect-ratio: square;
   object-fit: cover;
+}
+.recipe__thumb--loading {
+  background-color: rgba(255, 255, 255, 0.1);
+  width: 100%;
+  aspect-ratio: 1/1;
+  display: grid;
+  place-items: center;
 }
 </style>

@@ -1,3 +1,75 @@
+<script setup>
+import axios from "axios";
+import { onMounted, onUnmounted, ref } from "vue";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
+const recipe = ref(null);
+const localData = ref([]);
+const isFavorited = ref(null);
+
+axios({
+  method: "get",
+  url: `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${route.params.id}`,
+}).then((res) => {
+  recipe.value = res.data.meals[0];
+});
+
+const getLocalStorage = () => {
+  let dummy = JSON.parse(localStorage.getItem("favoriteMeals"));
+
+  if (typeof dummy !== "object" || !localStorage.getItem("favoriteMeals")) {
+    localData.value = [];
+    return;
+  } else {
+    localData.value = dummy;
+  }
+};
+
+const pushRecipeToLocal = (idMeal, strMeal, strCategory, strArea) => {
+  localData.value.push({
+    idMeal,
+    strMeal,
+    strCategory,
+    strArea,
+  });
+
+  checkFavorited();
+
+  localStorage.setItem("favoriteMeals", JSON.stringify(localData.value));
+};
+
+const clearLocalData = () => {
+  localData.value = null;
+};
+
+const checkFavorited = () => {
+  isFavorited.value = localData.value.filter((item) => {
+    return item.idMeal == route.params.id;
+  });
+  if (isFavorited.value.length < 1) {
+    isFavorited.value = null;
+  }
+};
+
+const removeFromFavorite = () => {
+  localData.value = localData.value.filter((item) => {
+    return item.idMeal != route.params.id;
+  });
+
+  isFavorited.value = null;
+
+  localStorage.setItem("favoriteMeals", JSON.stringify(localData.value));
+};
+
+onMounted(() => {
+  getLocalStorage();
+  checkFavorited();
+});
+
+onUnmounted(clearLocalData);
+</script>
+
 <template>
   <main class="container" v-if="recipe">
     <img
@@ -135,76 +207,3 @@ pre {
   }
 }
 </style>
-
-<script setup>
-import axios from "axios";
-import { onMounted, onUnmounted, ref } from "vue";
-import { useRoute } from "vue-router";
-
-const route = useRoute();
-const recipe = ref(null);
-const localData = ref([]);
-const isFavorited = ref(null);
-
-axios({
-  method: "get",
-  url: `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${route.params.id}`,
-}).then((res) => {
-  recipe.value = res.data.meals[0];
-});
-
-const getLocalStorage = () => {
-  let dummy = JSON.parse(localStorage.getItem("favoriteMeals"));
-
-  if (typeof dummy !== "object" || !localStorage.getItem("favoriteMeals")) {
-    localData.value = [];
-    return;
-  } else {
-    localData.value = dummy;
-  }
-};
-
-const pushRecipeToLocal = (idMeal, strMeal, strCategory, strArea) => {
-  localData.value.push({
-    idMeal,
-    strMeal,
-    strCategory,
-    strArea,
-  });
-
-  checkFavorited();
-
-  localStorage.setItem("favoriteMeals", JSON.stringify(localData.value));
-};
-
-const clearLocalData = () => {
-  localData.value = null;
-};
-
-const checkFavorited = () => {
-  isFavorited.value = localData.value.filter((item) => {
-    return item.idMeal == route.params.id;
-  });
-  if (isFavorited.value.length < 1) {
-    isFavorited.value = null;
-  }
-};
-
-const removeFromFavorite = () => {
-  localData.value = localData.value.filter((item) => {
-    console.log(item.idMeal);
-    return item.idMeal != route.params.id;
-  });
-
-  isFavorited.value = null;
-
-  localStorage.setItem("favoriteMeals", JSON.stringify(localData.value));
-};
-
-onMounted(() => {
-  getLocalStorage();
-  checkFavorited();
-});
-
-onUnmounted(clearLocalData);
-</script>

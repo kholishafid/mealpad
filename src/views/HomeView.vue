@@ -7,7 +7,7 @@ const router = useRouter();
 </script>
 
 <template>
-  <header>
+  <header class="home__header">
     <Motion
       :initial="{ y: -100, opacity: 0 }"
       :animate="{ y: 0, opacity: 1 }"
@@ -39,7 +39,8 @@ const router = useRouter();
 </template>
 
 <style scoped>
-header {
+.home__header {
+  padding-bottom: 0;
   display: grid;
   place-items: center;
 }

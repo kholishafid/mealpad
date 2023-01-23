@@ -1,0 +1,13 @@
+{
+  "name": "MealPad",
+  "short_name": "MealPad",
+  "display": "standalone",
+  "description": "A collection of recipes.",
+  "icons": [
+    {
+      "src": "public/icon.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    }
+  ]
+}
