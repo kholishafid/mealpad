@@ -1,0 +1,58 @@
+/* recipe-card */
+
+.recipe {
+  overflow: hidden;
+}
+.recipe__card {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-height: fit-content;
+  overflow: hidden;
+  background-color: transparent;
+}
+.recipefooter {
+  padding: 1rem;
+  margin: 0;
+}
+.recipe--loading {
+  width: 100%;
+  aspect-ratio: 68/93;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  display: grid;
+  place-items: center;
+}
+.recipe__thumb--loading {
+  background-color: rgba(255, 255, 255, 0.1);
+  width: 100%;
+  aspect-ratio: 1/1;
+  display: grid;
+  place-items: center;
+}
+.recipefooter__head h4 {
+  margin: 0;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.recipefooter__head span {
+  margin: 0 10px 4px 0;
+}
+.recipefooter__head {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.recipefooter__action a {
+  margin-right: 10px;
+}
+.recipefooter__action span {
+  cursor: pointer;
+}
+.recipefooter--loading {
+  width: 100%;
+  aspect-ratio: 59/26;
+}

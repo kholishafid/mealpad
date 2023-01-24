@@ -217,6 +217,10 @@ details {
   display: flex;
 }
 
+summary {
+  transition: all 300ms ease;
+}
+
 .grided-result {
   width: 100%;
   display: grid;
@@ -230,6 +234,12 @@ details {
 }
 .categories div {
   cursor: pointer;
+}
+
+.categories div:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: var(--primary);
 }
 @media screen and (max-width: 992px) {
   .grided-result {

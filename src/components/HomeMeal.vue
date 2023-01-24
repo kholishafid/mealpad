@@ -6,11 +6,13 @@ import { $ref } from "vue/macros";
 
 const props = defineProps(["meal"]);
 
-const imgload = $ref(true);
+const stillLoad = $ref(true);
 
 const randomRecipe = ref(null);
 
 const getRandomRecipe = async () => {
+  stillLoad = true;
+
   await axios({
     method: "get",
     url: "https://www.themealdb.com/api/json/v1/1/random.php",
@@ -23,102 +25,44 @@ onMounted(getRandomRecipe);
 </script>
 
 <template>
-  <article class="recipe" v-if="randomRecipe">
-    <Motion
-      :initial="{ opacity: 0, scale: 0.8 }"
-      :animate="{ opacity: 1, scale: 1 }"
-      :transition="{ delay: 0.2, duration: 1 }"
-      class="recipe__thumb"
-    >
-      <template v-if="randomRecipe.strMealThumb">
-        <img
-          :src="randomRecipe.strMealThumb"
-          :alt="randomRecipe.strMeal"
-          @load="imgload = false"
-          :style="{ display: imgload === true ? 'none' : 'block' }"
-        />
-        <div class="recipe__thumb--loading" v-if="imgload">
-          <span aria-busy="true"></span>
-        </div>
-      </template>
-    </Motion>
-    <footer>
-      <div>
-        <h4>{{ randomRecipe.strMeal }}</h4>
-        <div>
-          <span>#{{ randomRecipe.strCategory }}</span>
-          <span>#{{ randomRecipe.strArea }}</span>
-        </div>
+  <Motion
+    :initial="{ y: -20 }"
+    :animate="{ y: 0 }"
+    :transition="{ duration: 0.8 }"
+    class="recipe"
+  >
+    <article class="recipe__card" v-if="randomRecipe">
+      <img
+        :src="randomRecipe.strMealThumb"
+        :alt="randomRecipe.strMeal"
+        @load="imgload = false"
+        :style="{ display: stillLoad === true ? 'none' : 'block' }"
+      />
+      <div class="recipe__thumb recipe__thumb--loading" v-if="stillLoad">
+        <span aria-busy="true"></span>
       </div>
-      <div>
-        <router-link :to="'/recipe/' + randomRecipe.idMeal">
-          Recipe
-        </router-link>
-        <span role="link" @click="getRandomRecipe">Another</span>
+      <footer class="recipefooter" v-if="!stillLoad">
+        <div class="recipefooter__head">
+          <h4>{{ randomRecipe.strMeal }}</h4>
+          <div>
+            <span>#{{ randomRecipe.strCategory }}</span>
+            <span>#{{ randomRecipe.strArea }}</span>
+          </div>
+        </div>
+        <div class="recipefooter__action">
+          <router-link :to="'/recipe/' + randomRecipe.idMeal">
+            Recipe
+          </router-link>
+          <span role="link" @click="getRandomRecipe">Another</span>
+        </div>
+      </footer>
+      <footer class="recipefooter recipefooter--loading" v-else></footer>
+    </article>
+    <article v-else class="recipe__card">
+      <div class="recipe__thumb--loading">
+        <span aria-busy="true"></span>
       </div>
-    </footer>
-  </article>
-  <div v-else class="recipe--loading">
-    <span aria-busy="true"></span>
-  </div>
+      <footer class="recipefooter recipefooter--loading"></footer>
+    </article>
+  </Motion>
 </template>
-
-<style scoped>
-article {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  max-height: fit-content;
-  overflow: hidden;
-  background-color: transparent;
-}
-article footer {
-  padding: 1rem;
-  margin: 0;
-}
-
-.recipe--loading {
-  width: 100%;
-  aspect-ratio: 68/93;
-  border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.1);
-  display: grid;
-  place-items: center;
-}
-
-footer h4 {
-  margin: 0;
-  width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-footer span {
-  margin: 0 10px 4px 0;
-}
-
-footer div:nth-child(2) a {
-  margin-right: 10px;
-}
-footer div:nth-child(2) span {
-  cursor: pointer;
-}
-article .body {
-  box-sizing: border-box;
-  display: grid;
-  place-items: center;
-}
-.body img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.recipe__thumb--loading {
-  background-color: rgba(255, 255, 255, 0.1);
-  width: 100%;
-  aspect-ratio: 1/1;
-  display: grid;
-  place-items: center;
-}
-</style>

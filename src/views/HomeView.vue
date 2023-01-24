@@ -15,10 +15,10 @@ const router = useRouter();
     >
       <img src="../assets/vegan-recipe.png" alt="lets cook illust" />
       <h1>Lets Cooking With Me!</h1>
+      <button @click="router.push('/search')">
+        <h6>Search Recipes</h6>
+      </button>
     </Motion>
-    <button @click="router.push('/search')">
-      <h6>Search Recipes</h6>
-    </button>
   </header>
 
   <Suspense>

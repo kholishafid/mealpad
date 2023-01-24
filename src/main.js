@@ -6,6 +6,7 @@ import router from "./router";
 
 import "../pico.min.css";
 import "../style.css";
+import "../global.css";
 
 const app = createApp(App);
 
