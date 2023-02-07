@@ -8,17 +8,14 @@ const router = useRouter();
 
 <template>
   <header class="home__header">
-    <Motion
-      :initial="{ y: -100, opacity: 0 }"
-      :animate="{ y: 0, opacity: 1 }"
-      :transition="{ delay: 0.2, duration: 1 }"
-    >
+    <Motion :initial="{ y: -100, opacity: 0 }" :animate="{ y: 0, opacity: 1 }"
+      :transition="{ delay: 0.2, duration: 1 }">
       <div class="home__hero">
         <img src="../assets/vegan-recipe.png" alt="lets cook illust" />
         <h1 class="hero__heading">Lets Cooking With Me!</h1>
       </div>
       <button @click="router.push('/search')" class="header__button">
-        <h6>Search Recipes</h6>
+        Search Recipes
       </button>
     </Motion>
   </header>
@@ -40,4 +37,6 @@ const router = useRouter();
   </Suspense>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+</style>

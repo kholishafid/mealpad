@@ -165,7 +165,7 @@ const mealArea = [
   <header class="container">
     <div>
       <div>
-        <input type="text" name="" id="" v-model="searchQuery" />
+        <input type="text" name="" id="" v-model="searchQuery" placeholder="Search Recipe" />
       </div>
     </div>
     <details>
@@ -212,6 +212,7 @@ const mealArea = [
 header {
   padding-bottom: 0;
 }
+
 details {
   display: flex;
 }
@@ -226,11 +227,13 @@ summary {
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
 }
+
 .categories {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
 }
+
 .categories div {
   cursor: pointer;
 }
@@ -240,11 +243,13 @@ summary {
   text-underline-offset: 2px;
   text-decoration-color: var(--primary);
 }
+
 @media screen and (max-width: 992px) {
   .grided-result {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
 @media screen and (max-width: 576px) {
   .grided-result {
     grid-template-columns: repeat(2, 1fr);

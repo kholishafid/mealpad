@@ -110,7 +110,7 @@ onUnmounted(clearLocalData);
           <h6>Measure</h6>
           <div v-if="recipe">
             <ul v-for="item in 20">
-              <li v-if="recipe[`strMeasure${item}`]">
+              <li v-if="recipe[`strMeasure${item}`] !== ' '">
                 {{ recipe[`strMeasure${item}`] }}
               </li>
             </ul>

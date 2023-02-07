@@ -1,5 +1,51 @@
 /* 
   ==========================================
+  #navbar style
+  ==========================================
+*/
+
+.navbar {
+  background-color: var(--card-background-color);
+  backdrop-filter: blur(100px);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  box-shadow: var(--card-box-shadow);
+}
+
+.navbar__hamburger {
+  display: none;
+}
+
+.navbar .router-link-exact-active {
+  text-decoration: underline;
+  text-decoration-color: var(--primary);
+  text-underline-offset: 4px;
+}
+
+.navbar__brand {
+  margin: 0;
+}
+
+@media screen and (max-width: 576px) {
+  .navbar__menu {
+    display: none;
+    z-index: -9999;
+  }
+
+  .navbar__hamburger {
+    display: block;
+  }
+}
+
+/* 
+  ==========================================
+  #end of navbar style
+  ==========================================
+*/
+
+/* 
+  ==========================================
   #recipe-card
   ##recipe card style
   ==========================================
@@ -7,6 +53,7 @@
 
 .recipe {
   overflow: hidden;
+  box-shadow: var(--card-box-shadow);
 }
 .recipe__card {
   margin: 0;
@@ -24,12 +71,10 @@
   width: 100%;
   aspect-ratio: 68/93;
   border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.1);
   display: grid;
   place-items: center;
 }
 .recipe__thumb--loading {
-  background-color: rgba(255, 255, 255, 0.1);
   width: 100%;
   aspect-ratio: 1/1;
   display: grid;
@@ -90,9 +135,6 @@
   width: fit-content;
   margin: 1rem auto;
 }
-.header__button h6 {
-  margin: 0;
-}
 .suggestion__heading {
   text-align: center;
 }
@@ -130,3 +172,23 @@
   #end of home style
   ==========================================
 */
+
+.theme__switcher {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--contrast);
+  color: white;
+  position: fixed;
+  z-index: 200;
+  bottom: var(--spacing);
+  right: var(--block-spacing-horizontal);
+  border-radius: 100%;
+}
+
+.theme__switcher-dark {
+  background: #fff;
+  color: var(--background-color);
+}

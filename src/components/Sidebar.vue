@@ -38,23 +38,23 @@ const { changeSidebarVisibility } = uiState;
   right: 0;
   height: 100vh;
   z-index: 99999;
-  background-color: hsla(247, 24%, 7%, 0.8);
+  background-color: var(--card-background-color);
   backdrop-filter: blur(100px);
   display: flex;
   flex-direction: column;
   width: 60%;
   padding: 0 var(--block-spacing-vertical);
   border-left: 1px solid hsla(0, 0%, 50%, 0.1);
+  box-shadow: var(--card-box-shadow);
 }
+
 .sidebar ul li {
   list-style: disc;
 }
+
 .sidebar .close-button {
   text-align: right;
   margin: 1rem 0;
-}
-.sidebar ul li a {
-  color: #fffffe;
 }
 
 .router-link-exact-active {

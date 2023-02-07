@@ -1,76 +1,40 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap");
-
-/* Pink Light scheme (Default) */
+/* Amber Light scheme (Default) */
 /* Can be forced with data-theme="light" */
 [data-theme="light"],
 :root:not([data-theme="dark"]) {
-  --background-color: #fffffe;
-  --color: #a7a9be;
-  --h1-color: #0f0e17;
-  --h2-color: #0f0e17;
-  --h3-color: #0f0e17;
-  --h4-color: #0f0e17;
-  --h5-color: #0f0e17;
-  --h6-color: #0f0e17;
-  --primary: #ff8906;
-  --primary-hover: #ff8f0e;
-  --primary-focus: rgba(255, 255, 255, 0);
-  --primary-inverse: #fff;
-  --contras: #fffffe;
-  --secondary: rgba(15, 14, 22, 0.3);
+  --primary: #ffb300;
+  --primary-hover: #ffa000;
+  --primary-focus: rgba(255, 179, 0, 0.125);
+  --primary-inverse: rgba(0, 0, 0, 0.75);
 }
 
-/* Pink Dark scheme (Auto) */
+/* Amber Dark scheme (Auto) */
 /* Automatically enabled if user has Dark mode enabled */
 @media only screen and (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --background-color: #0f0e17;
-    --color: #a7a9be;
-    --h1-color: #fffffe;
-    --h2-color: #fffffe;
-    --h3-color: #fffffe;
-    --h4-color: #fffffe;
-    --h5-color: #fffffe;
-    --h6-color: #fffffe;
-    --primary: #ff8906;
-    --primary-hover: #ff8f0e;
-    --primary-focus: rgba(255, 255, 255, 0);
-    --primary-inverse: #fff;
-    --contras: #fffffe;
-    --card-background-color: rgba(255, 255, 255, 0.01);
-    --card-sectionning-background-color: rgba(255, 255, 255, 0.03);
-    --code-background-color: rgba(255, 255, 255, 0.03);
-    --form-element-background-color: rgba(255, 255, 255, 0.03);
+    --primary: #ffb300;
+    --primary-hover: #ffc107;
+    --primary-focus: rgba(255, 179, 0, 0.25);
+    --primary-inverse: rgba(0, 0, 0, 0.75);
   }
 }
 
-/* Pink Dark scheme (Forced) */
+/* Amber Dark scheme (Forced) */
 /* Enabled if forced with data-theme="dark" */
 [data-theme="dark"] {
-  --background-color: #0f0e17;
-  --color: #a7a9be;
-  --h1-color: #fffffe;
-  --h2-color: #fffffe;
-  --h3-color: #fffffe;
-  --h4-color: #fffffe;
-  --h5-color: #fffffe;
-  --h6-color: #fffffe;
-  --primary: #ff8906;
-  --primary-hover: #ffffff00;
-  --primary-focus: rgba(255, 255, 255, 0);
-  --primary-inverse: #fff;
-  --contras: #fffffe;
-  --secondary: rgba(255, 255, 255, 0.3);
+  --primary: #ffb300;
+  --primary-hover: #ffc107;
+  --primary-focus: rgba(255, 179, 0, 0.25);
+  --primary-inverse: rgba(0, 0, 0, 0.75);
 }
 
-/* Pink (Common styles) */
+/* Deep-orange (Common styles) */
 :root {
   --form-element-active-border-color: var(--primary);
   --form-element-focus-color: var(--primary-focus);
   --switch-color: var(--primary-inverse);
   --switch-checked-background-color: var(--primary);
   --font-family: Montserrat, Helvatica;
-  --dark-headline: #0f0e17;
-  --dark-paragraph: #2e2f3e;
   --tertiary: #e53170;
 }
