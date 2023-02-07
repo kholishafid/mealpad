@@ -2,22 +2,22 @@
 import { Motion } from "@motionone/vue";
 import axios from "axios";
 import { onMounted, ref } from "vue";
-import { $ref } from "vue/macros";
 
 const props = defineProps(["meal"]);
 
-const stillLoad = $ref(true);
+const stillLoad = ref(true);
 
 const randomRecipe = ref(null);
 
 const getRandomRecipe = async () => {
-  stillLoad = true;
+  stillLoad.value = true;
 
   await axios({
     method: "get",
     url: "https://www.themealdb.com/api/json/v1/1/random.php",
   }).then((res) => {
     randomRecipe.value = res.data.meals[0];
+    stillLoad.value == false
   });
 };
 
@@ -25,19 +25,10 @@ onMounted(getRandomRecipe);
 </script>
 
 <template>
-  <Motion
-    :initial="{ y: -20 }"
-    :animate="{ y: 0 }"
-    :transition="{ duration: 0.8 }"
-    class="recipe"
-  >
+  <Motion :initial="{ y: -20 }" :animate="{ y: 0 }" :transition="{ duration: 0.8 }" class="recipe">
     <article class="recipe__card" v-if="randomRecipe">
-      <img
-        :src="randomRecipe.strMealThumb"
-        :alt="randomRecipe.strMeal"
-        @load="imgload = false"
-        :style="{ display: stillLoad === true ? 'none' : 'block' }"
-      />
+      <img :src="randomRecipe.strMealThumb" :alt="randomRecipe.strMeal" @load="stillLoad = false"
+        :style="{ display: stillLoad === true ? 'none' : 'block' }" />
       <div class="recipe__thumb recipe__thumb--loading" v-if="stillLoad">
         <span aria-busy="true"></span>
       </div>

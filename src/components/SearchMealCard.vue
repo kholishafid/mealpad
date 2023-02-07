@@ -1,27 +1,20 @@
 <script setup>
 import { Motion } from "@motionone/vue";
-import { computed } from "vue";
-import { useRouter } from "vue-router";
-import { $ref } from "vue/macros";
+import { computed, ref } from "vue";
 
 const props = defineProps(["meal"]);
-const imgLoad = $ref(true);
+const imgLoad = ref(true);
 const isImgLoading = computed(() => {
-  return imgLoad ? "none" : "block";
+  return imgLoad === true ? "none" : "block";
 });
 </script>
 
 <template>
   <Motion class="recipe">
     <article class="recipe__card">
-      <img
-        :src="meal.strMealThumb"
-        :alt="meal.strMealThumb"
-        :style="{ display: isImgLoading }"
-        loading="lazy"
-        @load="imgLoad = false"
-      />
-      <div v-if="imgLoad" class="recipe_thumb recipe__thumb--loading">
+      <img :src="meal.strMealThumb" :alt="meal.strMealThumb" :style="{ display: isImgLoading }" loading="lazy"
+        @load="imgLoad = false" />
+      <div v-if="imgLoad === true" class="recipe_thumb recipe__thumb--loading">
         <span aria-busy="true"></span>
       </div>
       <footer class="recipefooter">

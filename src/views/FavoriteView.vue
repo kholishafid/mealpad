@@ -1,3 +1,33 @@
+<script setup>
+import { onMounted, onUnmounted, ref } from "vue";
+import { useRouter } from "vue-router";
+
+const favoriteList = ref(null);
+
+const router = useRouter();
+
+const getLocalStorage = () => {
+  favoriteList.value = JSON.parse(localStorage.getItem("favoriteMeals"));
+};
+
+const clearFavoriteList = () => {
+  favoriteList.value = null;
+};
+
+const removeFromFavorite = (id) => {
+  favoriteList.value = favoriteList.value.filter((item) => {
+    console.log(item.idMeal);
+    return item.idMeal != id;
+  });
+
+  localStorage.setItem("favoriteMeals", JSON.stringify(favoriteList.value));
+};
+
+onMounted(getLocalStorage);
+
+onUnmounted(clearFavoriteList);
+</script>
+
 <template>
   <main class="container" v-if="favoriteList">
     <div v-if="favoriteList.length > 0">
@@ -52,32 +82,3 @@ article h5 {
   cursor: pointer;
 }
 </style>
-<script setup>
-import { onMounted, onUnmounted, ref } from "vue";
-import { useRouter } from "vue-router";
-
-const favoriteList = ref(null);
-
-const router = useRouter();
-
-const getLocalStorage = () => {
-  favoriteList.value = JSON.parse(localStorage.getItem("favoriteMeals"));
-};
-
-const clearFavoriteList = () => {
-  favoriteList.value = null;
-};
-
-const removeFromFavorite = (id) => {
-  favoriteList.value = favoriteList.value.filter((item) => {
-    console.log(item.idMeal);
-    return item.idMeal != id;
-  });
-
-  localStorage.setItem("favoriteMeals", JSON.stringify(favoriteList.value));
-};
-
-onMounted(getLocalStorage);
-
-onUnmounted(clearFavoriteList);
-</script>

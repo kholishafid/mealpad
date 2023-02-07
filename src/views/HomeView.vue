@@ -13,18 +13,20 @@ const router = useRouter();
       :animate="{ y: 0, opacity: 1 }"
       :transition="{ delay: 0.2, duration: 1 }"
     >
-      <img src="../assets/vegan-recipe.png" alt="lets cook illust" />
-      <h1>Lets Cooking With Me!</h1>
-      <button @click="router.push('/search')">
+      <div class="home__hero">
+        <img src="../assets/vegan-recipe.png" alt="lets cook illust" />
+        <h1 class="hero__heading">Lets Cooking With Me!</h1>
+      </div>
+      <button @click="router.push('/search')" class="header__button">
         <h6>Search Recipes</h6>
       </button>
     </Motion>
   </header>
 
   <Suspense>
-    <main class="container">
-      <h3>How About This Meals</h3>
-      <div class="main-grid">
+    <main class="container suggestion">
+      <h3 class="suggestion__heading">How About This Meals</h3>
+      <div class="home-card-grid">
         <MealCard />
         <MealCard />
         <MealCard />
@@ -38,63 +40,4 @@ const router = useRouter();
   </Suspense>
 </template>
 
-<style scoped>
-.home__header {
-  padding-bottom: 0;
-  display: grid;
-  place-items: center;
-}
-
-header h1 {
-  text-align: center;
-  margin: 3rem 0;
-}
-header div:first-child {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-header button {
-  width: fit-content;
-}
-
-header h6 {
-  display: inline-block;
-  margin: 0;
-}
-header span {
-  font-size: 1.2rem;
-}
-
-main h3 {
-  text-align: center;
-}
-
-.main-grid {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-}
-@media screen and (max-width: 992px) {
-  .main-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media screen and (max-width: 576px) {
-  .main-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media screen and (min-width: 828px) {
-  header div h1 {
-    margin: 0 0 0 3rem;
-  }
-  header button {
-    margin-top: 4rem;
-  }
-}
-</style>
+<style scoped></style>

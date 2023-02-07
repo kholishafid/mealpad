@@ -1,4 +1,9 @@
-/* recipe-card */
+/* 
+  ==========================================
+  #recipe-card
+  ##recipe card style
+  ==========================================
+*/
 
 .recipe {
   overflow: hidden;
@@ -56,3 +61,72 @@
   width: 100%;
   aspect-ratio: 59/26;
 }
+
+/* 
+  ==========================================
+  #end of recipe card style
+  ==========================================
+*/
+
+/* 
+  ==========================================
+  #home
+  ##home style
+  ==========================================
+*/
+.home__header {
+  margin: 0 auto;
+}
+.home__hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.hero__heading {
+  margin: 3rem 0;
+}
+.header__button {
+  width: fit-content;
+  margin: 1rem auto;
+}
+.header__button h6 {
+  margin: 0;
+}
+.suggestion__heading {
+  text-align: center;
+}
+.home-card-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+@media screen and (max-width: 992px) {
+  .home-card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 576px) {
+  .hero__heading {
+    text-align: center;
+  }
+  .home-card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 828px) {
+  .header__button {
+    margin: 4rem auto 1rem auto;
+  }
+  .home__header {
+    padding-bottom: 0;
+  }
+}
+
+/* 
+  ==========================================
+  #end of home style
+  ==========================================
+*/

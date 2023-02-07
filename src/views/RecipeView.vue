@@ -72,11 +72,7 @@ onUnmounted(clearLocalData);
 
 <template>
   <main class="container" v-if="recipe">
-    <img
-      :src="recipe.strMealThumb"
-      :alt="'image of ' + recipe.strMeal"
-      class="meal-thumb"
-    />
+    <img :src="recipe.strMealThumb" :alt="'image of ' + recipe.strMeal" class="meal-thumb" />
     <article class="recipe">
       <header>
         <h3>{{ recipe.strMeal }}</h3>
@@ -86,26 +82,16 @@ onUnmounted(clearLocalData);
             <span># {{ recipe.strArea }}</span>
           </div>
           <div>
-            <span
-              class="material-icons-outlined favorite-icon"
-              @click="
-                pushRecipeToLocal(
-                  recipe.idMeal,
-                  recipe.strMeal,
-                  recipe.strCategory,
-                  recipe.strArea
-                )
-              "
-              v-if="!isFavorited"
-              >favorite_border</span
-            >
-            <span
-              class="material-icons favorite-icon"
-              v-else
-              @click="removeFromFavorite"
-              data-fav="favorited"
-              >favorite</span
-            >
+            <span class="material-icons-outlined favorite-icon" @click="
+              pushRecipeToLocal(
+                recipe.idMeal,
+                recipe.strMeal,
+                recipe.strCategory,
+                recipe.strArea
+              )
+            " v-if="!isFavorited">favorite_border</span>
+            <span class="material-icons favorite-icon" v-else @click="removeFromFavorite"
+              data-fav="favorited">favorite</span>
           </div>
         </div>
       </header>
@@ -122,9 +108,9 @@ onUnmounted(clearLocalData);
         </div>
         <div>
           <h6>Measure</h6>
-          <div>
+          <div v-if="recipe">
             <ul v-for="item in 20">
-              <li v-if="recipe[`strMeasure${item}`].length > 1">
+              <li v-if="recipe[`strMeasure${item}`]">
                 {{ recipe[`strMeasure${item}`] }}
               </li>
             </ul>
@@ -150,22 +136,27 @@ onUnmounted(clearLocalData);
 .recipe header p {
   margin-right: 10px;
 }
+
 .sub-heading {
   position: relative;
 }
+
 .meal-thumb {
   border-radius: var(--border-radius);
 }
+
 .tag span {
   margin-right: 10px;
   display: inline-block;
 }
+
 .favorite-icon {
   position: absolute;
   top: 0;
   right: 0;
   cursor: pointer;
 }
+
 .favorite-icon[data-fav="favorited"] {
   color: var(--tertiary);
 }
@@ -173,12 +164,14 @@ onUnmounted(clearLocalData);
 .card-body ul li {
   font-size: small;
 }
+
 pre {
   white-space: pre-wrap;
   font-family: Inter;
   line-height: 32px;
   padding: 4px;
 }
+
 .loading {
   display: block;
   text-align: center;
@@ -194,13 +187,16 @@ pre {
       "inst inst";
     gap: 1rem;
   }
+
   main img {
     grid-area: img;
   }
+
   main article:nth-child(2) {
     grid-area: card;
     margin: 0;
   }
+
   main article:nth-child(3) {
     grid-area: inst;
     margin: 0;

@@ -1,21 +1,20 @@
 <script setup>
 import axios from "axios";
 import { ref, watchEffect } from "vue";
-import { $ref } from "vue/macros";
 import SearchMealCard from "../components/SearchMealCard.vue";
 
 const data = ref(null);
 const searchQuery = ref(null);
 const timeoutInterval = ref(null);
-const loading = $ref(null);
-const recipeUnavaible = $ref(null);
+const loading = ref(null);
+const recipeUnavaible = ref(null);
 
 watchEffect(() => {
   searchQuery.value;
 
   clearTimeout(timeoutInterval.value);
 
-  loading = true;
+  loading.value = true;
 
   timeoutInterval.value = setTimeout(() => {
     axios
@@ -23,7 +22,7 @@ watchEffect(() => {
         `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchQuery.value}`
       )
       .then((res) => {
-        loading = false;
+        loading.value = false;
         if (searchQuery.value && res.data.meals === null) {
           return (recipeUnavaible = true);
         }
@@ -39,11 +38,11 @@ const getMealByArea = async (area) => {
     headers: {},
   };
 
-  loading = true;
+  loading.value = true;
   await axios(config)
     .then(function (response) {
       data.value = response.data.meals;
-      loading = false;
+      loading.value = false;
     })
     .catch(function (error) {
       console.log(error);
@@ -51,11 +50,11 @@ const getMealByArea = async (area) => {
 };
 
 const getMealByCategory = async (category) => {
-  loading = true;
+  loading.value = true;
   await axios
     .get("https://www.themealdb.com/api/json/v1/1/filter.php?c=" + category)
     .then((res) => {
-      loading = false;
+      loading.value = false;
       data.value = res.data.meals;
     });
 };
