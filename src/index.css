@@ -1,0 +1,22 @@
+.running-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.running-item {
+  top: 0;
+  left: 0;
+  display: flex;
+  width: max-content;
+  animation: linear 30s infinite text-running;
+}
+
+@keyframes text-running {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
