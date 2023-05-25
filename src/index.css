@@ -8,7 +8,7 @@
   left: 0;
   display: flex;
   width: max-content;
-  animation: linear 30s infinite text-running;
+  animation: linear 80s infinite text-running;
 }
 
 @keyframes text-running {
@@ -16,7 +16,11 @@
     transform: translateX(0);
   }
 
-  100% {
+  50% {
     transform: translateX(-50%);
+  }
+
+  100% {
+    transform: translateX(0);
   }
 }
