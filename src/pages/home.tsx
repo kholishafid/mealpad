@@ -1,92 +1,83 @@
-import HeroImage from '../assets/image/chef.png'
-import Button from '../components/button'
-import Card from '../components/card/card'
-import RecommendationImage from '../assets/image/cook-recipe.png'
-import CookWithMe from '../assets/image/ingridients.png'
-import { Link } from 'react-router-dom'
+import HeroImage from "../assets/image/chef.png";
+import Button from "../components/button";
+import Card from "../components/card/card";
+import ShareImage from "../assets/image/soup-kitchen.png"
+import { Link } from "react-router-dom";
+import RunningText from "../components/running-text";
 
 export default function Home() {
   return (
-    <div className='overflow-hidden'>
-      <section className='py-20 bg-amber-4'>
+    <div className="overflow-hidden">
+      <section className="py-20 bg-amber-4 border-b-2 border-black">
         <img
-          className='mx-auto mb-4'
+          className="mx-auto mb-4"
           src={HeroImage}
           alt="mealpad cook ilustration"
         />
-        <h1 className='text-2xl md:text-3xl uppercase font-semibold text-center font-sans my-10'>
+        <h1 className="text-2xl md:text-3xl uppercase font-semibold text-center font-sans my-10">
           Colection of recipee around the world
         </h1>
-        <Link to={'/search'}>
-          <Button>
-            Search Recipe
-          </Button>
+        <Link to={"/search"}>
+          <Button>Search Recipe</Button>
         </Link>
       </section>
 
-      <section>
-        <div className='running-wrapper'>
-          <div className='running-item'>
-            <h2 className='font-sans font-semibold uppercase text-lg'>
-              - Lets Cook With Me -- Lets Cook With Me -- Lets Cook With Me -
-            </h2>
-
-            <h2 className='font-sans font-semibold uppercase text-lg'>
-              - Lets Cook With Me -- Lets Cook With Me -- Lets Cook With Me -
-            </h2>
-
-            <h2 className='font-sans font-semibold uppercase text-lg'>
-              - Lets Cook With Me - Lets Cook With Me -- Lets Cook With Me -
-            </h2>
-
-            <h2 className='font-sans font-semibold uppercase text-lg'>
-              - Lets Cook With Me -- Lets Cook With Me -- Lets Cook With Me -
-            </h2>
+      <div className='py-8'>
+        <RunningText text="- Lets Cook With Me -- Lets Cook With Me -- Lets Cook With Me -" />
+        <section className="running-wrapper py-8">
+          <div className="running-item flex gap-8">
+            <Card
+              title={false}
+              className="w-[200px] md:w-[300px]"
+              url="https://themealdb.com/api/json/v1/1/random.php"
+            />
+            <Card
+              title={false}
+              className="w-[200px] md:w-[300px]"
+              url="https://themealdb.com/api/json/v1/1/random.php"
+            />
+            <Card
+              title={false}
+              className="w-[200px] md:w-[300px]"
+              url="https://themealdb.com/api/json/v1/1/random.php"
+            />
+            <Card
+              title={false}
+              className="w-[200px] md:w-[300px]"
+              url="https://themealdb.com/api/json/v1/1/random.php"
+            />
+            <Card
+              title={false}
+              className="w-[200px] md:w-[300px]"
+              url="https://themealdb.com/api/json/v1/1/random.php"
+            />
+            <Card
+              title={false}
+              className="w-[200px] md:w-[300px]"
+              url="https://themealdb.com/api/json/v1/1/random.php"
+            />
+            <Card
+              title={false}
+              className="w-[200px] md:w-[300px]"
+              url="https://themealdb.com/api/json/v1/1/random.php"
+            />
+            <Card
+              title={false}
+              className="w-[200px] md:w-[300px]"
+              url="https://themealdb.com/api/json/v1/1/random.php"
+            />
           </div>
+        </section>
+        <RunningText text="- Lets Cook With Me -- Lets Cook With Me -- Lets Cook With Me -" />
+      </div>
+
+      <section className='py-24 bg-red border-t-2 border-black'>
+        <div className="mx-auto w-fit">
+          <img className='mb-4' src={ShareImage} alt="mealpad - share" />
+          <h2 className='font-sans font-semibold text-center text-3xl uppercase'>Dont forget to share</h2>
         </div>
       </section>
 
-      <section className='my-16'>
-        <div className='flex'>
-          <img className='mb-4' src={RecommendationImage} alt="mealpad recommendation" />
-          <img className='mb-4' src={HeroImage} alt="mealpad recommendation" />
-          <img className='mb-4' src={CookWithMe} alt="mealpad recommendation" />
-        </div>
-      </section>
-
-      <section>
-        <div className='running-wrapper'>
-          <div className='running-item'>
-            <h2 className='font-sans font-semibold uppercase text-lg'>
-              - Lets Cook With Me -- Lets Cook With Me -- Lets Cook With Me -
-            </h2>
-
-            <h2 className='font-sans font-semibold uppercase text-lg'>
-              - Lets Cook With Me -- Lets Cook With Me -- Lets Cook With Me -
-            </h2>
-
-            <h2 className='font-sans font-semibold uppercase text-lg'>
-              - Lets Cook With Me - Lets Cook With Me -- Lets Cook With Me -
-            </h2>
-
-            <h2 className='font-sans font-semibold uppercase text-lg'>
-              - Lets Cook With Me -- Lets Cook With Me -- Lets Cook With Me -
-            </h2>
-          </div>
-        </div>
-      </section>
-
-      <section className='px-4 py-16'>
-        <div className='flex flex-col  items-center justify-center mb-20'>
-          <h1 className='text-2xl font-sans font-semibold text-center'>Try Our Recommendation</h1>
-        </div>
-        <div className='grid gap-8 md:grid-cols-2 lg:grid-cols-3 p-4'>
-          <Card url='https://themealdb.com/api/json/v1/1/random.php' />
-          <Card url='https://themealdb.com/api/json/v1/1/random.php' />
-          <Card url='https://themealdb.com/api/json/v1/1/random.php' />
-          <Card url='https://themealdb.com/api/json/v1/1/random.php' />
-        </div>
-      </section>
     </div>
-  )
+  );
 }
