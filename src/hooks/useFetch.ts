@@ -4,6 +4,9 @@ interface MealI {
   strMealThumb: string;
   strMeal: string;
   strTags: string;
+  strCategory: string;
+  strArea: string;
+  [key: string]: string;
 }
 
 function useFetch(url: string) {
@@ -31,8 +34,10 @@ function useFetch(url: string) {
       setIsLoading(false);
     }
   };
+
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url]);
 
   return {
