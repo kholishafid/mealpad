@@ -1,4 +1,3 @@
-import RunningText from "../running-text";
 import RunningItem from "./running-item";
 
 const Footer = () => {

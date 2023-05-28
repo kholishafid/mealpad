@@ -1,4 +1,4 @@
-import { EventHandler, FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import "../index.css";
 import Button from "../components/button";
 import ImageSearch from "../assets/image/food-search.png";
