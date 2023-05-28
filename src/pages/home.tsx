@@ -1,14 +1,14 @@
 import HeroImage from "../assets/image/chef.png";
 import Button from "../components/button";
-import Card from "../components/card/card";
+import Card from "../components/card";
 import ShareImage from "../assets/image/soup-kitchen.png"
 import { Link } from "react-router-dom";
 import RunningText from "../components/running-text";
 
-export default function Home() {
+export default function HomePage() {
   return (
     <div className="overflow-hidden">
-      <section className="py-20 bg-amber-4 border-b-2 border-black">
+      <section className="py-20 px-4 bg-amber-4 border-b-2 border-black">
         <img
           className="mx-auto mb-4"
           src={HeroImage}
@@ -71,7 +71,7 @@ export default function Home() {
         <RunningText text="- Lets Cook With Me -- Lets Cook With Me -- Lets Cook With Me -" />
       </div>
 
-      <section className='py-24 bg-red border-t-2 border-black'>
+      <section className='py-24 px-4 bg-red border-t-2 border-black'>
         <div className="mx-auto w-fit">
           <img className='mb-4' src={ShareImage} alt="mealpad - share" />
           <h2 className='font-sans font-semibold text-center text-3xl uppercase'>Dont forget to share</h2>

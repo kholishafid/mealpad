@@ -2,8 +2,9 @@ import { useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import LoadingIndicator from "../components/loading-indicator";
 import Image from "../components/image";
+import HeartIcon from "../assets/icon/heart.svg"
 
-const RecipePages = () => {
+const RecipePage = () => {
   const { id } = useParams();
 
   const { data, isLoading } = useFetch(
@@ -18,6 +19,7 @@ const RecipePages = () => {
         <div className="lg:(flex gap-8)">
           <section className="mb-4 md:(w-1/2 mb-6) lg:w-2/5 rounded-2xl">
             <Image thumbUrl={data?.meals[0].strMealThumb} />
+            <img src={HeartIcon} alt="" />
           </section>
 
           <section className="px-1 flex-1">
@@ -72,4 +74,4 @@ const RecipePages = () => {
   );
 };
 
-export default RecipePages;
+export default RecipePage;

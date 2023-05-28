@@ -1,9 +1,10 @@
 import { Route, Routes } from 'react-router-dom'
-import Home from './pages/home'
-import Search from './pages/search'
 import Navbar from './components/navbar'
 import Footer from './components/footer/footer'
-import RecipePages from './pages/recipe'
+import HomePage from './pages/home'
+import SearchPage from './pages/search'
+import RecipePage from './pages/recipe'
+import FavoritesPage from './pages/favorites'
 
 function App() {
 
@@ -11,9 +12,10 @@ function App() {
     <>
       <Navbar />
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/search' element={<Search />} />
-        <Route path='/recipe/:id' element={<RecipePages />} />
+        <Route path='/' element={<HomePage />} />
+        <Route path='/search' element={<SearchPage />} />
+        <Route path='/recipe/:id' element={<RecipePage />} />
+        <Route path='/favorites' element={<FavoritesPage />} />
       </Routes>
       <Footer />
     </>

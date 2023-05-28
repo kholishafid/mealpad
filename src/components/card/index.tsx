@@ -1,7 +1,6 @@
 import useFetch from "../../hooks/useFetch";
 import { useNavigate } from "react-router-dom";
 import CardImage from "../image";
-import CardImageFallback from "./fallback";
 import CardImageHover from "../image/hover";
 
 interface CardPropI {
@@ -25,13 +24,7 @@ const Card = ({ url, title = true, className }: CardPropI) => {
       onClick={() => handleRedirect(data?.meals[0].idMeal ?? "0")}
     >
       <div className={"relative  h-fit grid " + className}>
-        {
-          data?.meals[0].strMealThumb
-            ?
-            <CardImage thumbUrl={data?.meals[0].strMealThumb} />
-            :
-            <CardImageFallback />
-        }
+        <CardImage thumbUrl={data?.meals[0].strMealThumb} />
 
         <CardImageHover withTitle={title} title={data?.meals[0].strMeal} />
       </div>
