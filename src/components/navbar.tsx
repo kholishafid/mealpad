@@ -41,7 +41,7 @@ const Navbar = () => {
             <Link to={'/search'} className={pathname === '/search' ? routerActiveC : ''}>Search</Link>
           </li>
           <li>
-            {/* <Link to={'/favorites'} className={pathname === '/favorites' ? routerActiveC : ''}>Favorites</Link> */}
+            <Link to={'/bookmark'} className={pathname === '/bookmark' ? routerActiveC : ''}>Bookmark</Link>
           </li>
         </ul>
       </div>
