@@ -1,14 +1,22 @@
-.running-wrapper {
-  position: relative;
-  overflow: hidden;
+body {
+  /* background-color: #E7E5E4; */
 }
 
-.running-item {
-  top: 0;
-  left: 0;
-  display: flex;
-  width: max-content;
-  animation: linear 80s infinite text-running;
+/* Navbar */
+.nav-active {
+  @apply bg-stone-2 border-b border-black
+}
+
+.bg-gradient-stone {
+  background: linear-gradient(to bottom, #E7E5E4, transparent)
+}
+
+.filter-slider .swiper-slide {
+  width: fit-content !important;
+}
+
+.swiper-button-disabled {
+  opacity: 0.3;
 }
 
 @keyframes text-running {

@@ -1,24 +1,13 @@
-import { Route, Routes } from 'react-router-dom'
-import Navbar from './components/navbar'
-import Footer from './components/footer/footer'
-import HomePage from './pages/home'
-import SearchPage from './pages/search'
-import RecipePage from './pages/recipe'
-import BookmarkPage from './pages/bookmark'
+import { Outlet, ScrollRestoration } from 'react-router-dom'
+
 
 function App() {
 
   return (
-    <>
-      <Navbar />
-      <Routes>
-        <Route path='/' element={<HomePage />} />
-        <Route path='/search' element={<SearchPage />} />
-        <Route path='/recipe/:id' element={<RecipePage />} />
-        <Route path='/bookmark' element={<BookmarkPage />} />
-      </Routes>
-      <Footer />
-    </>
+    <div className='min-h-[100vh] h-full'>
+      <Outlet />
+      <ScrollRestoration />
+    </div>
   )
 }
 

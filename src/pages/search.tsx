@@ -1,113 +1,105 @@
-import { FormEvent, useRef, useState } from "react";
-import "../index.css";
-import Button from "../components/button";
-import ImageSearch from "../assets/image/food-search.png";
+import { ChangeEvent } from "react";
+import { MealResults } from "../types/meal";
+import { useQuery } from "@tanstack/react-query";
+import { AppNavbar } from "../components/app-navbar";
+import { useSearchParams } from "react-router-dom";
+import axios from "axios";
 import Card from "../components/card";
-import EditIcon from "../assets/icon/edit-2.svg"
+import SearchFilter from "../components/search-filter";
+import "../index.css";
+import { SearchResult } from "../components/search-result";
+import { SearchSuggestion } from "../components/search-suggestion";
 
-interface MealI {
-  idMeal: string;
-  strMealThumb: string;
-  strMeal: string;
-  strTags: string;
+type AnyFunction = (...args: any[]) => any;
+
+function debounce<T extends AnyFunction>(func: T, delay: number): (...args: Parameters<T>) => void {
+  let timeoutId: number;
+
+  return function debouncedFunction(...args: Parameters<T>): void {
+    clearTimeout(timeoutId);
+
+    timeoutId = setTimeout(() => {
+      func(...args);
+    }, delay);
+  };
 }
 
 export default function SearchPage() {
-  const [data, setData] = useState<{ meals: MealI[] }>();
-  const [query, setQuery] = useState<string | undefined>("");
+  const [searchParams, setSearchParams] = useSearchParams()
 
-  const input = useRef<HTMLInputElement>(null);
-
-  const fetchData = async (api: string) => {
-    const response = await fetch(api, { mode: "cors" })
-      .then((res) => {
-        return res.json();
-      })
-      .catch((err) => {
-        console.log(err);
+  function changeSearchKey(e: ChangeEvent<HTMLInputElement>) {
+    const input = e.target;
+    setSearchParams((prev) => {
+      const key = { key: input.value }
+      return new URLSearchParams({
+        ...Object.fromEntries(prev.entries()),
+        ...key,
       });
-    return setData(response);
-  };
+    })
+  }
 
-  const handleSearch = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-
-    if (query !== "") {
-      fetchData(
-        "https://www.themealdb.com/api/json/v1/1/search.php?s=" + query
-      );
+  const { data } = useQuery({
+    queryKey: [searchParams.get('key')],
+    queryFn: async (): Promise<MealResults | string> => {
+      if (searchParams.get('key') && searchParams.get('by') === 'area') {
+        return await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${searchParams.get('key')}`).then(res => res.data).then(res => res as MealResults)
+      }
+      if (searchParams.get('key') && searchParams.get('by') === 'name') {
+        return await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchParams.get('key')}`).then(res => res.data).then(res => res as MealResults)
+      }
+      if (searchParams.get('key') && searchParams.get('by') === 'category') {
+        return await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${searchParams.get('key')}`).then(res => res.data).then(res => res as MealResults)
+      }
+      return 'Search by tyiping in search box'
     }
+  })
 
-    const target = event.target as HTMLFormElement
-    target.reset()
-  };
+  const debounceSearch = debounce(changeSearchKey, 300)
 
   return (
     <div>
-      {!data && (
-        <section className="min-h-[90vh] flex px-4">
-          <div className="lg:flex w-fit mx-auto my-auto gap-4">
-            <img
-              className="mx-auto lg:mx-0"
-              src={ImageSearch}
-              alt="mealpad search"
-            />
-            <form
-              onSubmit={handleSearch}
-              className="relative flex justify-between items-center gap-4"
-            >
-              <input
-                className="p-1 px-2 w-full sm:w-[250px] outline-none text-2xl font-sans border-b-2 border-black"
-                type="text"
-                placeholder="Search here"
-                ref={input}
-                defaultValue={query}
-                onChange={(e) => setQuery(e.target.value)}
-              />
-              <Button display="inline">Search</Button>
-            </form>
+      <section className="container mx-auto pb-8 lg:(max-w-5xl)">
+        <div className="bg-stone-2 px-4 rounded-b-4 mb-8">
+          <AppNavbar />
+          <h2 className="font-medium text-xl px-2">What are you searching for</h2>
+          <div className="-bottom-5 relative z-10">
+            <div className="flex">
+              <div className="relative w-full">
+                <span className="absolute top-3 left-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                  </svg>
+                </span>
+                <input type="search" className="pl-11  w-full px-4 pt-2.5 pb-3 rounded-l-md focus:outline-4 focus:outline-red bg-stone-1" placeholder="Search" onChange={debounceSearch} />
+                <SearchSuggestion />
+              </div>
+              <SearchFilter />
+            </div>
           </div>
-        </section>
-      )}
+        </div>
 
-      <section className={data && 'min-h-[90vh] flex flex-col justify-center pt-16 pb-18 px-4'}>
-        {data && (
-          <div className="flex mx-auto w-fit mb-10">
-            <span className="text-5xl">"</span>
-            <h1 className="font-sans text-5xl uppercase font-semibold underline underline-gray">
-              {query}
-            </h1>
-            <span className="text-5xl">"</span>
-            <img
-              src={EditIcon}
-              className='h-12 cursor-pointer'
-              alt=""
-              onClick={() => setData(undefined)}
-            />
-          </div>
-        )}
+        <div className="text-center mt-12 text-slate-7">
+          {typeof data === 'string' ? data :
+            <SearchResult result={data} />
+          }
+        </div>
 
-        {data && (
-          <div className='mb-10'>
-            <h1 className='font-sans text-2xl mx-auto w-fit'>
-              Search for '{query}' have {data.meals?.length ?? 0} results
-            </h1>
-          </div>
-        )}
+        <hr className="my-8 mx-4" />
 
-        <div className="h-full w-full grid grid-cols-2 gap-4 md:(grid-cols-3 px-8) lg:grid-cols-4 md:gap-8">
-          {data?.meals?.map((meal) => {
-            return (
+        <div className="px-4">
+          <h3 className="mb-6 font-semibold text-lg">Why not try this recipee</h3>
+          <div className="grid grid-cols-2 gap-4 md:(grid-cols-4)">
+            {[...Array(4)].map((_, i) => (
               <Card
-                key={meal.idMeal}
-                url={`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meal.idMeal}`}
+                title={true}
+                url="https://themealdb.com/api/json/v1/1/random.php"
+                key={i}
+                keyQ={i}
               />
-            );
-          })}
+            ))}
+          </div>
         </div>
       </section>
-
-
     </div>
   );
 }

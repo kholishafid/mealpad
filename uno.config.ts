@@ -1,3 +1,4 @@
+import transformDirectives from "@unocss/transformer-directives";
 import {
   defineConfig,
   presetUno,
@@ -11,9 +12,9 @@ export default defineConfig({
     presetWebFonts({
       provider: "google",
       fonts: {
-        sans: "Work Sans:200,300,400,500,600",
+        sans: "Assistant:200,300,400,500,600",
       },
     }),
   ],
-  transformers: [transformerVariantGroup()],
+  transformers: [transformerVariantGroup(), transformDirectives()],
 });

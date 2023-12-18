@@ -1,49 +1,25 @@
-import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useRef } from 'react';
+import { Link } from 'react-router-dom';
+
 const Navbar = () => {
-  const [sidebarActive, setSidebarActive] = useState<boolean>(false);
+  const nav = useRef<HTMLDivElement>(null)
 
-  const { pathname } = useLocation()
-
-  const routerActiveC = 'py-1 px-2  bg-black text-white w-full'
   return (
-    <nav className='p-4 flex justify-between sticky top-0 bg-slate-1 z-1 '>
-      <Link to={'/'} className='flex items-center gap-2 cursor-pointer'>
-        <img
-          className='h-8 hidden md:block'
-          src='/bowl.png'
-          alt='Meal Pad Logo'
-        />
-        <span className='font-semibold font-sans text-xl'>Meal Pad</span>
-      </Link>
-      <div className='flex items-center'>
-        <img
-          className='h-9 bg-slate-2 rounded cursor-pointer border border-black p-0.5 md:hidden'
-          src='/bowl.png'
-          alt='Meal Pad Logo'
-          onClick={() => setSidebarActive(true)}
-        />
-        <ul
-          className={'md:(flex gap-4 font-sans font-medium) lg:text-lg ' + (sidebarActive === true ? 'fixed inset-y-0 left-1/3 right-0 bg-slate-1 p-8 text-3xl flex flex-col gap-4 items-end' : 'hidden')}
-        >
-          <li>
-            <span
-              className='ml-auto block w-fit md:hidden cursor-pointer'
-              onClick={() => setSidebarActive(false)}
-            >
-              &#10005;
-            </span>
-          </li>
-          <li>
-            <Link to={'/'} className={pathname === '/' ? routerActiveC : ''}>Home</Link>
-          </li>
-          <li>
-            <Link to={'/search'} className={pathname === '/search' ? routerActiveC : ''}>Search</Link>
-          </li>
-          <li>
-            <Link to={'/bookmark'} className={pathname === '/bookmark' ? routerActiveC : ''}>Bookmark</Link>
-          </li>
-        </ul>
+    <nav className='p-4 transition bg-stone-2 h-20 flex items-center' ref={nav}>
+      <div className='flex justify-between container max-w-5xl mx-auto'>
+        <Link to={'/'} className='flex items-center gap-2 cursor-pointer'>
+          <img
+            className='h-8 hidden md:block'
+            src='/bowl.png'
+            alt='Meal Pad Logo'
+          />
+          <span className='font-semibold font-sans text-xl'>Meal Pad</span>
+        </Link>
+        <Link to={'/bookmark'}>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+          </svg>
+        </Link>
       </div>
     </nav>
   );
